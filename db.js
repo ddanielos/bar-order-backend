@@ -1,8 +1,13 @@
 require('dotenv').config();
 const Sequelize = require('sequelize');
 
-const CustomersModel = require('./app/models/customers');
-const ProductsModel = require('./app/models/products');
+const CustomerModel = require('./app/models/customers');
+const ProductModel = require('./app/models/products');
+const TableModel = require('./app/models/tables');
+const OrderModel = require('./app/models/orders');
+const OrderSplitModel = require('./app/models/order_splits');
+const OrderItemModel = require('./app/models/order_items');
+const PaymentModel = require('./app/models/payments');
 
 const sequelize = new Sequelize(
   process.env.DB_DATABASE,
@@ -24,8 +29,13 @@ async function testConnection(){
 }
 testConnection();
 
-const Customers = CustomersModel(sequelize, Sequelize);
-const Products = ProductsModel(sequelize, Sequelize);
+const Customer = CustomerModel(sequelize, Sequelize);
+const Product = ProductModel(sequelize, Sequelize);
+const Table = TableModel(sequelize, Sequelize);
+const Order = OrderModel(sequelize, Sequelize);
+const OrderSplit = OrderSplitModel(sequelize, Sequelize);
+const OrderItem = OrderItemModel(sequelize, Sequelize);
+const Payment = PaymentModel(sequelize, Sequelize);
 
 sequelize.sync({force: false})
   .then(()=>{
@@ -33,6 +43,11 @@ sequelize.sync({force: false})
   })
 
 module.exports = {
-  Customers,
-  Products
+  Customer,
+  Product,
+  Table,
+  Order,
+  OrderSplit,
+  OrderItem,
+  Payment
 }

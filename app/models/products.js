@@ -1,5 +1,5 @@
 module.exports = (sequelize, type) => {
-  return sequelize.define('products',{
+  return sequelize.define('product',{
     id: {
       type: type.INTEGER,
       primaryKey: true,
@@ -7,6 +7,7 @@ module.exports = (sequelize, type) => {
     },
     name: type.STRING,
     price: type.DECIMAL(10, 2),
-    category: type.ENUM('food','drink','dessert')
+    category: type.ENUM('food','drink','dessert'),
+    size: type.ENUM('pinta', 'media-pinta', 'botella')
   })
 }
