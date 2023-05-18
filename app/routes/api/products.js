@@ -1,29 +1,15 @@
 const router = require('express').Router();
 
-const { Product } = require('../../../db');
+const {getItems, getItem, createItem, updateItem, deleteItem} = require('../../controllers/products')
 
-router.get('/', async(req, res) => {
-  const products = await Product.findAll();
-  res.json(products);
-});
+router.get('/', getItems);
 
-router.post('/', async(req, res) => {
-  const product = await Product.create(req.body);
-  res.json(product);
-});
+router.get('/:productId', getItem);
 
-router.put('/:productId', async(req, res) => {
-  await Product.update(req.body, {
-    where: { id: req.params.productId }
-  });
-  res.json({ success: 'El parámetro ha sido modificado' });
-});
+router.post('/', createItem);
 
-router.delete('/:productId', async(req, res) => {
-  await Product.destroy({
-    where: { id: req.params.productId }
-  });
-  res.json({success: 'Se ha eliminado el producto'});
-});
+router.put('/:productId', updateItem);
+
+router.delete('/:productId', deleteItem);
 
 module.exports = router;

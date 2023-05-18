@@ -1,29 +1,15 @@
 const router = require('express').Router();
 
-const { OrderSplit } = require('../../../db');
+const {getItems, getItem, createItem, updateItem, deleteItem} = require('../../controllers/order_splits')
 
-router.get('/', async(req, res) => {
-  const orderSplits = await OrderSplit.findAll();
-  res.json(orderSplits);
-});
+router.get('/', getItems);
 
-router.post('/', async(req, res) => {
-  const orderSplit = await OrderSplit.create(req.body);
-  res.json(orderSplit);
-});
+router.get('/:orderSplitId', getItem);
 
-router.put('/:orderSplitId', async(req, res) => {
-  await OrderSplit.update(req.body, {
-    where: { id: req.params.orderSplitId }
-  });
-  res.json({ success: 'El parámetro ha sido modificado' });
-});
+router.post('/', createItem);
 
-router.delete('/:orderSplitId', async(req, res) => {
-  await OrderSplit.destroy({
-    where: { id: req.params.orderSplitId }
-  });
-  res.json({success: 'Se ha eliminado el item de la orden'});
-});
+router.put('/:orderSplitId', updateItem);
+
+router.delete('/:orderSplitId', deleteItem);
 
 module.exports = router;

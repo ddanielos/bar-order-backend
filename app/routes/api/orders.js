@@ -1,29 +1,15 @@
 const router = require('express').Router();
 
-const { Order } = require('../../../db');
+const {getItems, getItem, createItem, updateItem, deleteItem} = require('../../controllers/orders')
 
-router.get('/', async(req, res) => {
-  const orders = await Order.findAll();
-  res.json(orders);
-});
+router.get('/', getItems);
 
-router.post('/', async(req, res) => {
-  const order = await Order.create(req.body);
-  res.json(order);
-});
+router.get('/:orderId', getItem);
 
-router.put('/:orderId', async(req, res) => {
-  await Order.update(req.body, {
-    where: { id: req.params.orderId }
-  });
-  res.json({ success: 'El parámetro ha sido modificado' });
-});
+router.post('/', createItem);
 
-router.delete('/:orderId', async(req, res) => {
-  await Order.destroy({
-    where: { id: req.params.orderId }
-  });
-  res.json({success: 'Se ha eliminado la orden'});
-});
+router.put('/:orderId', updateItem);
+
+router.delete('/:orderId', deleteItem);
 
 module.exports = router;

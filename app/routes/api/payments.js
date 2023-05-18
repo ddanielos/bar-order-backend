@@ -1,29 +1,15 @@
 const router = require('express').Router();
 
-const { Payment } = require('../../../db');
+const {getItems, getItem, createItem, updateItem, deleteItem} = require('../../controllers/payments')
 
-router.get('/', async(req, res) => {
-  const payments = await Payment.findAll();
-  res.json(payments);
-});
+router.get('/', getItems);
 
-router.post('/', async(req, res) => {
-  const payment = await Payment.create(req.body);
-  res.json(payment);
-});
+router.get('/:paymentId', getItem);
 
-router.put('/:paymentId', async(req, res) => {
-  await Payment.update(req.body, {
-    where: { id: req.params.paymentId }
-  });
-  res.json({ success: 'El parámetro ha sido modificado' });
-});
+router.post('/', createItem);
 
-router.delete('/:paymentId', async(req, res) => {
-  await Payment.destroy({
-    where: { id: req.params.paymentId }
-  });
-  res.json({success: 'Se ha eliminado el pago'});
-});
+router.put('/:paymentId', updateItem);
+
+router.delete('/:paymentId', deleteItem);
 
 module.exports = router;

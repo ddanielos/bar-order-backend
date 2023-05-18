@@ -1,29 +1,15 @@
 const router = require('express').Router();
 
-const { Table } = require('../../../db');
+const {getItems, getItem, createItem, updateItem, deleteItem} = require('../../controllers/tables')
 
-router.get('/', async(req, res) => {
-  const tables = await Table.findAll();
-  res.json(tables);
-});
+router.get('/', getItems);
 
-router.post('/', async(req, res) => {
-  const table = await Table.create(req.body);
-  res.json(table);
-});
+router.get('/:tableId', getItem);
 
-router.put('/:tableId', async(req, res) => {
-  await Table.update(req.body, {
-    where: { id: req.params.tableId }
-  });
-  res.json({ success: 'El parámetro ha sido modificado' });
-});
+router.post('/', createItem);
 
-router.delete('/:tableId', async(req, res) => {
-  await Table.destroy({
-    where: { id: req.params.tableId }
-  });
-  res.json({success: 'Se ha eliminado la mesa'});
-});
+router.put('/:tableId', updateItem);
+
+router.delete('/:tableId', deleteItem);
 
 module.exports = router;
