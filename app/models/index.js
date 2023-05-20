@@ -8,6 +8,7 @@ const OrderModel = require('../models/orders');
 const OrderSplitModel = require('../models/order_splits');
 const OrderItemModel = require('../models/order_items');
 const PaymentModel = require('../models/payments');
+const UserModel = require('../models/users');
 
 const Product = ProductModel(sequelize, Sequelize);
 const Customer = CustomerModel(sequelize, Sequelize);
@@ -16,6 +17,7 @@ const Order = OrderModel(sequelize, Sequelize);
 const OrderSplit = OrderSplitModel(sequelize, Sequelize);
 const OrderItem = OrderItemModel(sequelize, Sequelize);
 const Payment = PaymentModel(sequelize, Sequelize);
+const User = UserModel(sequelize, Sequelize);
 
 const models = {
   Product,
@@ -24,7 +26,8 @@ const models = {
   Order,
   OrderSplit,
   OrderItem,
-  Payment
+  Payment,
+  User
 }
 
 module.exports = models;

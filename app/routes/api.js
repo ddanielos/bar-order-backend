@@ -7,6 +7,7 @@ const apiOrderRouter = require('./api/orders');
 const apiOrderSplitRouter = require('./api/order_splits');
 const apiOrderItemRouter = require('./api/order_items');
 const apiPaymentRouter = require('./api/payments');
+const apiUserRouter = require('./api/auth');
 
 router.use('/products', apiProductRouter);
 router.use('/customers', apiCustomerRouter);
@@ -15,5 +16,6 @@ router.use('/orders', apiOrderRouter);
 router.use('/ordersplits', apiOrderSplitRouter);
 router.use('/orderItems', apiOrderItemRouter);
 router.use('/payments', apiPaymentRouter);
+router.use('/register', apiUserRouter);
 
 module.exports = router;
